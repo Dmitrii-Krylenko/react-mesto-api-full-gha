@@ -1,0 +1,15 @@
+.header__out {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 122%;
+    color: #FFFFFF;
+    border: none;
+    padding: 0;
+    margin-left: 20px;
+    background-color: black;
+}
+
+.header__out:hover {
+    opacity: 0.6;
+}

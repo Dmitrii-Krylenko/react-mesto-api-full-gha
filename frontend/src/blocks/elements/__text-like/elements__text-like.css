@@ -1,0 +1,6 @@
+.elements__text-like {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}

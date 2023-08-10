@@ -1,0 +1,7 @@
+.popup__save_none-active {
+    background-color: #FFFFFF;
+    color: rgba(0, 0, 0, 1);
+    opacity: 0.2;
+    border: 1px solid #000000;
+    border-radius: 2px;
+}

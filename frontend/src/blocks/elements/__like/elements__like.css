@@ -1,0 +1,22 @@
+.elements__like {
+    background-image: url(../../../images/love.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    margin-right: 20px;
+    width: 22px;
+    height: 19px;
+    border: none;
+    transition: 0.5s;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.elements__like:hover {
+    opacity: 0.5;
+}
+
+.elements__like:active {
+    background-image: url(../../../images/loveActive.svg);
+    opacity: 1;
+}

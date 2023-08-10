@@ -1,0 +1,7 @@
+.popup__container_big {
+    border-radius: 0;
+    background-color: transparent;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
