@@ -34,6 +34,7 @@ class Api {
     async editUserInfo(name, about) {
         const response = await fetch(`${this._baseUrl}/users/me `, {
             method: "PATCH",
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 name: name,
@@ -45,6 +46,7 @@ class Api {
     async editPhoto(name, link) {
         const response = await fetch(`${this._baseUrl}/cards `, {
             method: "POST",
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 name: name,
@@ -57,6 +59,7 @@ class Api {
     async editUserAva(avatar) {
         const response = await fetch(`${this._baseUrl}/users/me/avatar`, {
             method: "PATCH",
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 avatar: avatar
@@ -70,6 +73,7 @@ class Api {
     async deleteCard(id) {
         const response = await fetch(`${this._baseUrl}/cards/${id}`, {
             method: "DELETE",
+            credentials: 'include',
             headers: this._headers
         })
         return this._checkResponse(response)
@@ -79,6 +83,7 @@ class Api {
     async setLike (id){
         const response = await fetch(`${this._baseUrl}/cards/${id}/likes`,{
             method: "PUT",
+            credentials: 'include',
             headers: this._headers
         })
         return this._checkResponse(response)
@@ -88,6 +93,7 @@ class Api {
     async deleteLike (id){
         const response = await fetch(`${this._baseUrl}/cards/${id}/likes`,{
             method: "DELETE",
+            credentials: 'include',
             headers: this._headers
         })
         return this._checkResponse(response)
@@ -105,10 +111,10 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65',
-    headers: {
-        authorization: '16cddbd8-a5a0-4ea8-ba7a-4e06d4944e1a',
-        'Content-Type': 'application/json'
-    }
+    baseUrl: 'http://localhost:4000',
+    // headers: {
+    //     authorization: '16cddbd8-a5a0-4ea8-ba7a-4e06d4944e1a',
+    //     'Content-Type': 'application/json'
+    // }
 })
 export default api

@@ -158,9 +158,8 @@ function App() {
   }
 
   const checkToken = () => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      auth.getToken(token)
+  
+      auth.getToken()
         .then((user) => {
           if (!user) {
             return
@@ -173,7 +172,7 @@ function App() {
           (err) => {
             setSuccsessful(Fail)
             console.log(err)})
-    }
+    
   }
 
   React.useEffect(
