@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
 
-const { PORT = 4000 } = process.env;
+const { PORT = 3000 } = process.env;
 const { routes } = require('./routes');
 const errorHandler = require('./middlewares/errorhandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(requestLogger);
