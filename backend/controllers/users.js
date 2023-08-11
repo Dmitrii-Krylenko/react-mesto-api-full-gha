@@ -115,7 +115,7 @@ module.exports.login = (req, res, next) => {
           const options = {
             maxAge: 1000 * 60 * 60 * 24 * 7,
             httpOnly: true,
-            sameSite: true
+            sameSite: true,
           };
           res.cookie('loginedUserToken', token, options);
           // аутентификация успешна
@@ -126,7 +126,7 @@ module.exports.login = (req, res, next) => {
               email: user.email,
               about: user.about,
               avatar: user.avatar,
-            }
+            },
           });
         });
     })
