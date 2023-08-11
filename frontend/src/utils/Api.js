@@ -16,8 +16,8 @@ class Api {
 
     async getInitialCards() {
         const response = await fetch(`${this._baseUrl}/cards`, {
-            headers: this._headers
-
+            headers: this._headers,
+            credentials: 'include'
         })
 
         return this._checkResponse(response)
@@ -25,8 +25,8 @@ class Api {
 
     async getUserInfo() {
         const response = await fetch(`${this._baseUrl}/users/me `, {
-            headers: this._headers
-
+            headers: this._headers,
+            credentials: 'include'
         })
         return this._checkResponse(response)
     }
@@ -112,9 +112,9 @@ class Api {
 
 const api = new Api({
     baseUrl: 'http://localhost:4000',
-    // headers: {
-    //     authorization: '16cddbd8-a5a0-4ea8-ba7a-4e06d4944e1a',
-    //     'Content-Type': 'application/json'
-    // }
+    headers: {
+        // authorization: '16cddbd8-a5a0-4ea8-ba7a-4e06d4944e1a',
+        'Content-Type': 'application/json'
+    }
 })
 export default api

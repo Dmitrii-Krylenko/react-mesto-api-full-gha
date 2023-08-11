@@ -71,7 +71,7 @@ function App() {
 
   function handleCardLike(card) {
 
-    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     if (isLiked) {
       api
@@ -147,9 +147,10 @@ function App() {
 
   function handlelogin({ password, email }) {
     auth.login(password, email)
-      .then(() => {
-        setEmail(email)
-        setLoggedIn(true)
+      .then((data) => {
+        setEmail(data.user.email);
+        setCurrentUser(data.user);
+        setLoggedIn(true);
         navigate('/', { replace: true });
       })
       .catch((err) => {
@@ -164,8 +165,9 @@ function App() {
           if (!user) {
             return
           }
+          setLoggedIn(true)
           setSuccsessful(true)
-          setEmail(user.data.email)
+          setEmail(user.email)
           navigate('/')
         })
         .catch(
