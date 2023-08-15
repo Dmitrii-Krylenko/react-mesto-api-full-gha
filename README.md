@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 84.252.139.3
+IP 84.252.139.3
 
-Frontend korolek.nomoreparties.co
+Frontend https://korolek.nomoreparties.co
 
 Backend https://api.korolek.nomoreparties.nomoreparties.co
