@@ -10,10 +10,15 @@ const errorHandler = require('./middlewares/errorhandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
+app.use(cors({ origin: 'https://korolek.nomoreparties.co', credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(requestLogger);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.use(routes);
 app.use(errorLogger);
 app.use(errors());

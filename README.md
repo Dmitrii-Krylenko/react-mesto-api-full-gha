@@ -5,12 +5,12 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://github.com/Dmitrii-Krylenko/react-mesto-api-full-gha.git
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 84.252.139.3
 
-Frontend https://...
+Frontend korolek.nomoreparties.co
 
-Backend https://...
+Backend https://api.korolek.nomoreparties.nomoreparties.co
