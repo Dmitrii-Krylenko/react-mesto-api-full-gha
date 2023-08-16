@@ -6,6 +6,8 @@ const BadRequest = require('../errors/badrequesterr');
 const Conflict = require('../errors/conflict');
 const NotFound = require('../errors/notfound');
 const Unauthorized = require('../errors/unauthorized');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 // Rout user
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -97,7 +99,6 @@ module.exports.login = (req, res, next) => {
   const {
     email, password,
   } = req.body;
-  console.log(req.body);
   User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
@@ -111,7 +112,7 @@ module.exports.login = (req, res, next) => {
             // хеши не совпали — отклоняем промис
             return Promise.reject(new Unauthorized('Неправильные почта или пароль'));
           }
-          const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
           const options = {
             maxAge: 1000 * 60 * 60 * 24 * 7,
             httpOnly: true,
