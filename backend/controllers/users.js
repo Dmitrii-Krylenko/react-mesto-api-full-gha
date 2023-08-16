@@ -14,7 +14,7 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getUserId = (req, res, next) => {
-  User.findById(req.params.userId, {}, { new: true, runValidators: false })
+  User.findById(req.params.userId)
     .then((user) => {
       if (!user) {
         return next(new NotFound('Пользователь по указанному _id не найден.'));
@@ -44,14 +44,14 @@ module.exports.createUser = (req, res, next) => {
         if (err.code === 11000) {
           return next(new Conflict('Такой пользователь уже существует.'));
         }
-        if (err.name === 'CastError' || err.name === 'ValidationError') {
+        if (err.name === 'ValidationError') {
           return next(new BadRequest('Переданы некорректные данные при создании пользователя. по умолчанию.'));
         }
         return next(err);
       }));
 };
 
-module.exports.updateUsers = (req, res, next) => {
+module.exports.updateUser = (req, res, next) => {
   const { name, about } = req.body;
   // const owner = req.user._id;
   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
@@ -101,7 +101,7 @@ module.exports.login = (req, res, next) => {
   User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new Error('Неправильные почта или пароль'));
+        return Promise.reject(new Unauthorized('Неправильные почта или пароль'));
       }
 
       // сравниваем переданный пароль и хеш из базы
@@ -109,7 +109,7 @@ module.exports.login = (req, res, next) => {
         .then((matched) => {
           if (!matched) {
             // хеши не совпали — отклоняем промис
-            return Promise.reject(new Error('Неправильные почта или пароль'));
+            return Promise.reject(new Unauthorized('Неправильные почта или пароль'));
           }
           const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
           const options = {
@@ -131,11 +131,11 @@ module.exports.login = (req, res, next) => {
         });
     })
 
-    .catch(() => next(new Unauthorized('Необходимо быть авторизованным')));
+    .catch(next);
 };
 
 module.exports.getCurrentUser = (req, res, next) => {
-  User.findById(req.user._id, {}, { new: true, runValidators: false })
+  User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         return next(
@@ -144,14 +144,5 @@ module.exports.getCurrentUser = (req, res, next) => {
       }
       return res.status(200).send(user);
     })
-    .catch((err) => {
-      if (err.name === 'CastError' || err.name === 'ValidationError') {
-        return next(
-          new BadRequest(
-            'Переданы некорректные данные.',
-          ),
-        );
-      }
-      return next(err);
-    });
+    .catch(next);
 };

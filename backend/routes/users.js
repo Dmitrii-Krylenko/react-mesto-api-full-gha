@@ -4,7 +4,7 @@ const { celebrate, Joi } = require('celebrate');
 const usersRouter = express.Router();
 const userPublicRouter = express.Router();
 const {
-  getUsers, getUserId, createUser, updateUsers, updateAvatar, login, getCurrentUser,
+  getUsers, getUserId, createUser, updateUser, updateAvatar, login, getCurrentUser,
 } = require('../controllers/users');
 
 const regEx = /(https?:\/\/)(w{3}\.)?([a-zA-Z0-9-]{0,63}\.)([a-zA-Z]{2,4})(\/[\w\-._~:/?#[\]@!$&'()*+,;=]#?)?/;
@@ -15,7 +15,7 @@ usersRouter.get('/me', getCurrentUser);
 
 usersRouter.get('/:userId', celebrate({
   params: Joi.object().keys({
-    userId: Joi.string().hex().required(),
+    userId: Joi.string().hex().length(24).required(),
   }),
 }), getUserId);
 
@@ -40,15 +40,15 @@ userPublicRouter.post('/signin', celebrate({
 
 usersRouter.patch('/me', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
+    about: Joi.string().min(2).max(30).required(),
 
   }),
-}), updateUsers);
+}), updateUser);
 
 usersRouter.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().pattern(new RegExp(regEx)),
+    avatar: Joi.string().pattern(new RegExp(regEx)).required(),
 
   }),
 }), updateAvatar);

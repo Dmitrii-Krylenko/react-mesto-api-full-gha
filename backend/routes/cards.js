@@ -2,7 +2,7 @@
 const express = require('express');
 const { celebrate, Joi } = require('celebrate');
 const {
-  getCards, postCards, deleteCards, likeCard, dislikeCard,
+  getCards, postCard, deleteCards, likeCard, dislikeCard,
 } = require('../controllers/cards');
 
 const regEx = /(https?:\/\/)(w{3}\.)?([a-zA-Z0-9-]{0,63}\.)([a-zA-Z]{2,4})(\/[\w\-._~:/?#[\]@!$&'()*+,;=]#?)?/;
@@ -16,7 +16,7 @@ cardsRouter.post('/', celebrate({
     link: Joi.string().pattern(new RegExp(regEx)).required(),
 
   }),
-}), postCards);
+}), postCard);
 cardsRouter.delete('/:cardId', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().length(24).hex().required(),
